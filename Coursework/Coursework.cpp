@@ -83,6 +83,17 @@ public:
 
 };
 
+class Person_with_email : public Person
+{
+
+protected:
+
+public:
+	Person_with_email(string email)
+	{
+	}
+};
+
 int main()
 {
 	string f, s, t;
@@ -92,16 +103,19 @@ int main()
 	cout << person.get_name() << " " << person.get_surname() << endl << endl;
 
 	cout << "Type your name: ";
-	cin >> f, person.set_name(f);
+	getline(cin, f), person.set_name(f);
+	//cin >> f, person.set_name(f);
 
 	cout << "Type your Surname: ";
-	cin >> s, person.set_surname(s);
+	getline(cin, s), person.set_surname(s);
+	//cin >> s, person.set_surname(s);
 
 	cout << "Your name is: " << person.get_name() << " " << person.get_surname() << endl << endl;
 
 	Person_with_telephone pwt("");
 	cout << pwt.has_telephone_p() << endl << endl << "Type Phonenumber: ";
-	cin >> t, pwt.set_telephone(t);
+	getline(cin, t), pwt.set_telephone(t);
+	//cin >> t, pwt.set_telephone(t);
 	cout << pwt.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwt.get_telephone() << endl;
 
 	return 0;
