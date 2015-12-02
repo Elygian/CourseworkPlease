@@ -2,6 +2,7 @@
 #include <string>
 
 using namespace std;
+//Work dammit
 
 class Person
 {
@@ -11,8 +12,7 @@ protected:
 
 public:
 	Person() {}
-	Person(const string& firstName, const string& lastName) :
-		m_FirstName(firstName), m_LastName(lastName)
+	Person(const string& firstName, const string& lastName)
 	{}
 
 	string get_name() const
