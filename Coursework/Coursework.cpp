@@ -16,8 +16,8 @@ public:
 	{
 		m_Name = "NoName";
 		m_Surname = "NoSurname";
-		m_Telephone = "NoNumber";
-		m_Email = "NoEmail";
+		m_Telephone = "";
+		m_Email = "";
 		set_name(f);
 		set_surname(s);
 	}
@@ -77,7 +77,7 @@ public:
 
 };
 
-class Person_with_telephone : public Person
+class Person_with_telephone : public virtual Person
 {
 
 protected:
@@ -101,7 +101,7 @@ public:
 
 };
 
-class Person_with_email : public Person
+class Person_with_email : public virtual Person
 {
 protected:
 
@@ -123,7 +123,7 @@ public:
 	}
 };
 
-class Person_with_telephone_and_email : public Person_with_telephone, public Person_with_email
+class Person_with_telephone_and_email : public virtual Person_with_telephone, public virtual Person_with_email
 {
 protected:
 
@@ -138,7 +138,7 @@ public:
 
 int main()
 {
-	string f, s, t, e;
+	string f, s, t, e, te, et;
 	char choice;
 
 	Person person("", "");
@@ -164,19 +164,13 @@ int main()
 	cout << email.has_email_p() << endl << endl << "Your email is: " << email.get_email() << endl << endl;
 
 	Person_with_telephone_and_email pwtae("","");
-	cout << /*pwtae.has_telephone_p() <<*/ endl << endl << "Type Phonenumber: ";
-	getline(cin, t), pwtae.set_telephone(t);
-	cout /*<< pwtae.has_telephone_p()*/ << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
+	cout /*<< pwt.has_telephone_p()*/ << endl << endl << "Type Phonenumber: ";
+	getline(cin, te), pwtae.set_telephone(te);
+	cout << pwtae.Person_with_telephone::has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
 
 	cout /*<< pwtae.has_email_p*/ << endl << endl << "Type email: ";
-	getline(cin, e), pwtae.set_email(e);
+	getline(cin, et), pwtae.set_email(et);
 	cout /*<< pwtae.has_email_p() */<< endl << endl << "Your email is: " << pwtae.get_email() << endl;
-
-	cout << "Your current details are: " << endl;
-	cout << person.get_name() << endl;
-	cout << person.get_surname() << endl;
-	cout << pwt.get_telephone() << endl;
-	cout << email.get_email() << endl;
 
 	return 0;
 }
