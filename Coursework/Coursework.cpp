@@ -8,8 +8,7 @@ class Person
 {
 
 protected:
-	string m_Name, m_Surname;
-	//change
+	string m_Name, m_Surname, m_telephone;
 
 public:
 	Person() {}
@@ -17,6 +16,7 @@ public:
 	{
 		m_Name = "NoName";
 		m_Surname = "NoSurname";
+		m_telephone = "";
 		set_name(f);
 		set_surname(s);
 	}
@@ -39,29 +39,6 @@ public:
 	{
 		return m_Surname;
 	}
-};
-
-class Person_with_telephone : public Person
-{
-
-protected:
-	string m_telephone;
-
-public:
-	Person_with_telephone(string telephone)
-	{
-		set_telephone(telephone);
-	}
-
-	void set_telephone(string telephone)
-	{
-		m_telephone = telephone;
-	}
-
-	string get_telephone()
-	{
-		return m_telephone;
-	}
 
 	bool has_telephone_p()
 	{
@@ -78,6 +55,30 @@ public:
 			return true;
 		}
 
+	}
+
+};
+
+class Person_with_telephone : public Person
+{
+
+protected:
+	//string m_telephone;
+
+public:
+	Person_with_telephone(string telephone)
+	{
+		set_telephone(telephone);
+	}
+
+	void set_telephone(string telephone)
+	{
+		m_telephone = telephone;
+	}
+
+	string get_telephone()
+	{
+		return m_telephone;
 	}
 
 };
