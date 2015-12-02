@@ -82,6 +82,7 @@ class Person_with_telephone : public Person
 protected:
 
 public:
+	Person_with_telephone() {}
 	Person_with_telephone(string telephone)
 	{
 		set_telephone(telephone);
@@ -104,6 +105,7 @@ class Person_with_email : public Person
 protected:
 
 public:
+	Person_with_email() {}
 	Person_with_email(string email)
 	{
 		set_email(email);
@@ -117,6 +119,19 @@ public:
 	string get_email()
 	{
 		return m_Email;
+	}
+};
+
+class Person_with_telephone_and_email : public Person_with_telephone, public Person_with_email
+{
+protected:
+
+public:
+	Person_with_telephone_and_email() {}
+	Person_with_telephone_and_email(string telephone, string email)
+	{
+		set_telephone(telephone);
+		set_email(email);
 	}
 };
 
@@ -153,6 +168,15 @@ int main()
 	cout << person.get_surname() << endl;
 	cout << pwt.get_telephone() << endl;
 	cout << email.get_email() << endl;
+
+	Person_with_telephone_and_email pwtae("","");
+	cout << /*pwtae.has_telephone_p() <<*/ endl << endl << "Type Phonenumber: ";
+	getline(cin, t), pwtae.set_telephone(t);
+	cout /*<< pwtae.has_telephone_p()*/ << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
+
+	cout /*<< pwtae.has_email_p*/ << endl << endl << "Type email: ";
+	getline(cin, e), pwtae.set_email(e);
+	cout /*<< pwtae.has_email_p() */<< endl << endl << "Your email is: " << pwtae.get_email() << endl;
 
 	return 0;
 }
