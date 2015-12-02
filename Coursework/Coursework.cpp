@@ -17,6 +17,7 @@ public:
 		m_Name = "NoName";
 		m_Surname = "NoSurname";
 		m_Telephone = "";
+		m_Email = "";
 		set_name(f);
 		set_surname(s);
 	}
@@ -137,10 +138,10 @@ public:
 
 int main()
 {
-	string f, s, t, e;
+	string f, s, t, e, te, et;
 	char choice;
 
-	Person person("NoName", "NoSurname");
+	Person person("", "");
 	cout << "Person Created" << endl;
 	cout << person.get_name() << " " << person.get_surname() << endl << endl;
 
@@ -162,21 +163,20 @@ int main()
 	getline(cin, e), email.set_email(e);
 	cout << email.has_email_p() << endl << endl << "Your email is: " << email.get_email() << endl << endl;
 
+	Person_with_telephone_and_email pwtae("","");
+	cout /*<< pwtae.has_telephone_p()*/ << endl << endl << "Type Phonenumber: ";
+	getline(cin, te), pwtae.set_telephone(te);
+	cout /*<< pwtae.has_telephone_p()*/ << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
+
+	cout /*<< pwtae.has_email_p*/ << endl << endl << "Type email: ";
+	getline(cin, et), pwtae.set_email(et);
+	cout /*<< pwtae.has_email_p() */<< endl << endl << "Your email is: " << pwtae.get_email() << endl;
 
 	cout << "Your current details are: " << endl;
 	cout << person.get_name() << endl;
 	cout << person.get_surname() << endl;
 	cout << pwt.get_telephone() << endl;
 	cout << email.get_email() << endl;
-
-	Person_with_telephone_and_email pwtae("","");
-	cout << /*pwtae.has_telephone_p() <<*/ endl << endl << "Type Phonenumber: ";
-	getline(cin, t), pwtae.set_telephone(t);
-	cout /*<< pwtae.has_telephone_p()*/ << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
-
-	cout /*<< pwtae.has_email_p*/ << endl << endl << "Type email: ";
-	getline(cin, e), pwtae.set_email(e);
-	cout /*<< pwtae.has_email_p() */<< endl << endl << "Your email is: " << pwtae.get_email() << endl;
 
 	return 0;
 }
