@@ -123,28 +123,36 @@ public:
 int main()
 {
 	string f, s, t, e;
+	char choice;
 
-	Person person("NoName","NoSurname");
+	Person person("NoName", "NoSurname");
 	cout << "Person Created" << endl;
 	cout << person.get_name() << " " << person.get_surname() << endl << endl;
 
 	cout << "Type your name: ";
-	getline(cin,f), person.set_name(f);
+	getline(cin, f), person.set_name(f);
 
 	cout << "Type your Surname: ";
-	getline(cin,s), person.set_surname(s);
+	getline(cin, s), person.set_surname(s);
 
 	cout << "Your name is: " << person.get_name() << " " << person.get_surname() << endl << endl;
 
 	Person_with_telephone pwt("");
 	cout << pwt.has_telephone_p() << endl << endl << "Type Phonenumber: ";
-	getline(cin,t), pwt.set_telephone(t);
+	getline(cin, t), pwt.set_telephone(t);
 	cout << pwt.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwt.get_telephone() << endl;
 
 	Person_with_email email("");
 	cout << email.has_email_p() << endl << endl << "Type email: ";
 	getline(cin, e), email.set_email(e);
-	cout << email.has_email_p() << endl << endl << "Your email is: " << email.get_email() << endl;
+	cout << email.has_email_p() << endl << endl << "Your email is: " << email.get_email() << endl << endl;
+
+
+	cout << "Your current details are: " << endl;
+	cout << person.get_name() << endl;
+	cout << person.get_surname() << endl;
+	cout << pwt.get_telephone() << endl;
+	cout << email.get_email() << endl;
 
 	return 0;
 }
