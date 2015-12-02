@@ -4,7 +4,7 @@
 //Allows use of basic C++ functions
 using namespace std;
 
-
+//Base class for all classes
 class Person
 {
 
