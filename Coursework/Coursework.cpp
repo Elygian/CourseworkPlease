@@ -9,6 +9,7 @@ class Person
 
 protected:
 	string m_Name, m_Surname;
+	//change
 
 public:
 	Person() {}
