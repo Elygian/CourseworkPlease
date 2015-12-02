@@ -41,7 +41,7 @@ public:
 		return m_Surname;
 	}
 
-	bool has_telephone_p()
+	virtual bool has_telephone_p()
 	{
 
 		if (m_Telephone.empty())
@@ -58,7 +58,7 @@ public:
 
 	}
 
-	bool has_email_p()
+	virtual bool has_email_p()
 	{
 
 		if (m_Email.empty())
@@ -77,7 +77,7 @@ public:
 
 };
 
-class Person_with_telephone : public Person
+class Person_with_telephone : public virtual Person
 {
 
 protected:
@@ -101,7 +101,7 @@ public:
 
 };
 
-class Person_with_email : public Person
+class Person_with_email : public virtual Person
 {
 protected:
 
@@ -123,7 +123,7 @@ public:
 	}
 };
 
-class Person_with_telephone_and_email : public Person_with_telephone, public Person_with_email
+class Person_with_telephone_and_email : public virtual Person_with_telephone, public virtual Person_with_email
 {
 protected:
 
@@ -133,6 +133,13 @@ public:
 	{
 		set_telephone(telephone);
 		set_email(email);
+
+	 bool has_telephone(); {}
+	}
+
+	virtual bool has_telephone()
+	{
+		Person_with_telephone::has_telephone();
 	}
 };
 
