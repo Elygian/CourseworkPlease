@@ -184,13 +184,13 @@ int main()
 
 	//Creates Person with telephone and email and returns telephone and email
 	Person_with_telephone_and_email pwtae("","");
-	cout << pwtae.Person_with_telephone::has_telephone_p() << endl << endl << "Type Phonenumber: ";
+	cout << pwtae.has_telephone_p() << endl << endl << "Type Phonenumber: ";
 	getline(cin, t), pwtae.set_telephone(t);
-	cout /*<< pwtae.has_telephone_p()*/ << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
+	cout << pwtae.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
 
-	cout /*<< pwtae.has_email_p*/ << endl << endl << "Type email: ";
+	cout << pwtae.has_email_p() << endl << endl << "Type email: ";
 	getline(cin, e), pwtae.set_email(e);
-	cout /*<< pwtae.has_email_p() */<< endl << endl << "Your email is: " << pwtae.get_email() << endl;
+	cout << pwtae.has_email_p() << endl << endl << "Your email is: " << pwtae.get_email() << endl;
 
 	return 0;
 }
