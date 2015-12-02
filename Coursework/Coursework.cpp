@@ -42,7 +42,7 @@ public:
 		return m_Surname;
 	}
 
-	bool has_telephone_p()
+	virtual bool has_telephone_p()
 	{
 
 		if (m_Telephone.empty())
@@ -59,7 +59,7 @@ public:
 
 	}
 
-	bool has_email_p()
+	virtual bool has_email_p()
 	{
 
 		if (m_Email.empty())
@@ -78,7 +78,7 @@ public:
 
 };
 
-class Person_with_telephone : public Person
+class Person_with_telephone : public virtual Person
 {
 
 protected:
@@ -102,7 +102,7 @@ public:
 
 };
 
-class Person_with_email : public Person
+class Person_with_email : public virtual Person
 {
 protected:
 
@@ -124,7 +124,7 @@ public:
 	}
 };
 
-class Person_with_telephone_and_email : public Person_with_telephone, public Person_with_email
+class Person_with_telephone_and_email : public virtual Person_with_telephone, public virtual Person_with_email
 {
 protected:
 
@@ -134,13 +134,6 @@ public:
 	{
 		set_telephone(telephone);
 		set_email(email);
-
-	 bool has_telephone(); {}
-	}
-
-	virtual bool has_telephone()
-	{
-		Person_with_telephone::has_telephone();
 	}
 };
 
@@ -185,13 +178,13 @@ int main()
 
 	//Creates Person with telephone and email and returns telephone and email
 	Person_with_telephone_and_email pwtae("","");
-	cout << pwtae.Person_with_telephone::has_telephone_p() << endl << endl << "Type Phonenumber: ";
+	cout << pwtae.has_telephone_p() << endl << endl << "Type Phonenumber: ";
 	getline(cin, t), pwtae.set_telephone(t);
-	cout /*<< pwtae.has_telephone_p()*/ << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
+	cout << pwtae.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
 
-	cout /*<< pwtae.has_email_p*/ << endl << endl << "Type email: ";
+	cout << pwtae.has_email_p() << endl << endl << "Type email: ";
 	getline(cin, e), pwtae.set_email(e);
-	cout /*<< pwtae.has_email_p() */<< endl << endl << "Your email is: " << pwtae.get_email() << endl;
+	cout << pwtae.has_email_p() << endl << endl << "Your email is: " << pwtae.get_email() << endl;
 
 	return 0;
 }
