@@ -8,7 +8,7 @@ class Person
 {
 
 protected:
-	string m_Name, m_Surname, m_telephone;
+	string m_Name, m_Surname, m_Telephone, m_Email;
 
 public:
 	Person() {}
@@ -16,7 +16,7 @@ public:
 	{
 		m_Name = "NoName";
 		m_Surname = "NoSurname";
-		m_telephone = "";
+		m_Telephone = "";
 		set_name(f);
 		set_surname(s);
 	}
@@ -43,7 +43,7 @@ public:
 	bool has_telephone_p()
 	{
 
-		if (m_telephone == "")
+		if (m_Telephone.empty())
 		{
 			cout << "You have no phone number registered" << endl;
 			return false;
@@ -57,13 +57,29 @@ public:
 
 	}
 
+	bool has_email_p()
+	{
+
+		if (m_Email.empty())
+		{
+			cout << "You have no email registered" << endl;
+			return false;
+		}
+
+		else
+		{
+			cout << "Your email is now registered" << endl;
+			return true;
+		}
+
+	}
+
 };
 
 class Person_with_telephone : public Person
 {
 
 protected:
-	//string m_telephone;
 
 public:
 	Person_with_telephone(string telephone)
@@ -73,50 +89,62 @@ public:
 
 	void set_telephone(string telephone)
 	{
-		m_telephone = telephone;
+		m_Telephone = telephone;
 	}
 
 	string get_telephone()
 	{
-		return m_telephone;
+		return m_Telephone;
 	}
 
 };
 
 class Person_with_email : public Person
 {
-
 protected:
 
 public:
 	Person_with_email(string email)
 	{
+		set_email(email);
+	}
+
+	void set_email(string email)
+	{
+		m_Email = email;
+	}
+
+	string get_email()
+	{
+		return m_Email;
 	}
 };
 
 int main()
 {
-	string f, s, t;
+	string f, s, t, e;
 
 	Person person("NoName","NoSurname");
 	cout << "Person Created" << endl;
 	cout << person.get_name() << " " << person.get_surname() << endl << endl;
 
 	cout << "Type your name: ";
-	getline(cin, f), person.set_name(f);
-	//cin >> f, person.set_name(f);
+	getline(cin,f), person.set_name(f);
 
 	cout << "Type your Surname: ";
-	getline(cin, s), person.set_surname(s);
-	//cin >> s, person.set_surname(s);
+	getline(cin,s), person.set_surname(s);
 
 	cout << "Your name is: " << person.get_name() << " " << person.get_surname() << endl << endl;
 
 	Person_with_telephone pwt("");
 	cout << pwt.has_telephone_p() << endl << endl << "Type Phonenumber: ";
-	getline(cin, t), pwt.set_telephone(t);
-	//cin >> t, pwt.set_telephone(t);
+	getline(cin,t), pwt.set_telephone(t);
 	cout << pwt.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwt.get_telephone() << endl;
+
+	Person_with_email email("");
+	cout << email.has_email_p() << endl << endl << "Type email: ";
+	getline(cin, e), email.set_email(e);
+	cout << email.has_email_p() << endl << endl << "Your email is: " << email.get_email() << endl;
 
 	return 0;
 }
