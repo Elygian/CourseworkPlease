@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+//Allows use of basic C++ functions
 using namespace std;
 
 
