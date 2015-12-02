@@ -12,7 +12,7 @@ protected:
 
 public:
 	Person() {}
-	Person(string f, string s) : m_Name(f), m_Surname(s)
+	Person(string f, string s)
 	{
 		m_Name = "NoName";
 		m_Surname = "NoSurname";
@@ -77,7 +77,7 @@ public:
 
 };
 
-class Person_with_telephone : public virtual Person
+class Person_with_telephone : public Person
 {
 
 protected:
@@ -101,7 +101,7 @@ public:
 
 };
 
-class Person_with_email : public virtual Person
+class Person_with_email : public Person
 {
 protected:
 
@@ -123,7 +123,7 @@ public:
 	}
 };
 
-class Person_with_telephone_and_email : public virtual Person_with_telephone, public virtual Person_with_email
+class Person_with_telephone_and_email : public Person_with_telephone, public Person_with_email
 {
 protected:
 
@@ -138,10 +138,10 @@ public:
 
 int main()
 {
-	string f, s, t, e, te, et;
-	char choice;
+	string f, s, t, e;
 
-	Person person("", "");
+	//Creates Person object and after input returns name and surname
+	Person person(f,s);
 	cout << "Person Created" << endl;
 	cout << person.get_name() << " " << person.get_surname() << endl << endl;
 
@@ -153,23 +153,36 @@ int main()
 
 	cout << "Your name is: " << person.get_name() << " " << person.get_surname() << endl << endl;
 
-	Person_with_telephone pwt("");
+	//Creates Person with telephone object and after input returns telephone, name, surname and if you have a telephone number
+	Person_with_telephone pwt(t);
+	cout << "Person with telephone Created" << endl;
 	cout << pwt.has_telephone_p() << endl << endl << "Type Phonenumber: ";
 	getline(cin, t), pwt.set_telephone(t);
 	cout << pwt.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwt.get_telephone() << endl;
 
-	Person_with_email email("");
+	cout << "Type your name: ";
+	getline(cin, f), pwt.set_name(f);
+
+	cout << "Type your surname: ";
+	getline(cin, s), pwt.set_surname(s);
+
+	cout << "Your name is: " << pwt.get_name() << " " << pwt.get_surname();
+	cout << "your number is: " << pwt.get_telephone() << endl << endl;
+
+	//Creates Person with email object and after input returns email
+	Person_with_email email(e);
 	cout << email.has_email_p() << endl << endl << "Type email: ";
 	getline(cin, e), email.set_email(e);
 	cout << email.has_email_p() << endl << endl << "Your email is: " << email.get_email() << endl << endl;
 
+	//Creates Person with telephone and email and returns telephone and email
 	Person_with_telephone_and_email pwtae("","");
-	cout /*<< pwt.has_telephone_p()*/ << endl << endl << "Type Phonenumber: ";
-	getline(cin, te), pwtae.set_telephone(te);
-	cout << pwtae.Person_with_telephone::has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
+	cout << pwtae.Person_with_telephone::has_telephone_p() << endl << endl << "Type Phonenumber: ";
+	getline(cin, t), pwtae.set_telephone(t);
+	cout /*<< pwtae.has_telephone_p()*/ << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
 
 	cout /*<< pwtae.has_email_p*/ << endl << endl << "Type email: ";
-	getline(cin, et), pwtae.set_email(et);
+	getline(cin, e), pwtae.set_email(e);
 	cout /*<< pwtae.has_email_p() */<< endl << endl << "Your email is: " << pwtae.get_email() << endl;
 
 	return 0;
