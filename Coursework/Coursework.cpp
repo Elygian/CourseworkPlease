@@ -9,39 +9,47 @@ class Person
 {
 
 protected:
-	string m_Name, m_Surname, m_Telephone, m_Email;
+	string m_Name = "NoName", m_Surname = "NoSurname", m_Telephone = "NoNumber", m_Email = "NoEmail";
 
 public:
 	Person() {}
-	Person(string f, string s)
+	Person(string &s, string &f)
 	{
-		m_Name = "NoName";
-		m_Surname = "NoSurname";
-		m_Telephone = "";
-		m_Email = "";
-		set_name(f);
 		set_surname(s);
+		set_name(f);
 	}
 
-	void set_name(string f)
+	void set_name(string &f)
 	{
 		m_Name = f;
 	}
 
-	void set_surname(string s)
+	void set_surname(string &s)
 	{
 		m_Surname = s;
 	}
 
-	string get_name()
+	virtual string get_name()
 	{
 		return m_Name;
 	}
-	string get_surname()
+
+	virtual string get_surname()
 	{
 		return m_Surname;
 	}
 
+	virtual string get_telephone()
+	{
+		return m_Telephone;
+	}
+
+	virtual string get_email()
+	{
+		return m_Email;
+	}
+
+	
 	virtual bool has_telephone_p()
 	{
 
@@ -85,19 +93,16 @@ protected:
 
 public:
 	Person_with_telephone() {}
-	Person_with_telephone(string telephone)
+	Person_with_telephone(string &s, string &f, string &telephone)
 	{
+		set_surname(s);
+		set_name(f);
 		set_telephone(telephone);
 	}
 
-	void set_telephone(string telephone)
+	void set_telephone(string &telephone)
 	{
 		m_Telephone = telephone;
-	}
-
-	string get_telephone()
-	{
-		return m_Telephone;
 	}
 
 };
@@ -108,20 +113,18 @@ protected:
 
 public:
 	Person_with_email() {}
-	Person_with_email(string email)
+	Person_with_email(string &s, string &f ,string &email)
 	{
+		set_surname(s);
+		set_name(f);
 		set_email(email);
 	}
 
-	void set_email(string email)
+	void set_email(string &email)
 	{
 		m_Email = email;
 	}
 
-	string get_email()
-	{
-		return m_Email;
-	}
 };
 
 class Person_with_telephone_and_email : public virtual Person_with_telephone, public virtual Person_with_email
@@ -130,19 +133,42 @@ protected:
 
 public:
 	Person_with_telephone_and_email() {}
-	Person_with_telephone_and_email(string telephone, string email)
+	Person_with_telephone_and_email(string &s, string &f, string &telephone, string &email)
 	{
+		set_surname(s);
+		set_name(f);
 		set_telephone(telephone);
 		set_email(email);
 	}
 };
 
+ostream& operator<<(ostream &os, Person &p)
+{
+	if (p.has_email_p() && p.has_telephone_p())
+	{
+		cout << "<person" << " S " << p.get_surname() << " F " << p.get_name() << " T " << p.get_telephone() << " E " << p.get_email()  << " >";
+	}
+	else if (p.has_email_p())
+	{
+		cout << "<person" << " S " << p.get_surname() << " F " << p.get_name() << " E " << p.get_email() << " >";
+	}
+	else if (p.has_telephone_p())
+	{
+		cout << "<person" << " S " << p.get_surname() << " F " << p.get_name() << " T " << p.get_telephone() << " >";
+	}
+	else
+	{
+		cout << "<person" << " S " << p.get_surname() << " F " << p.get_name() << " >";
+	}
+	return os;
+}
+
 int main()
 {
-	string f, s, t, e;
+	string s, f, t, e;
 
 	//Creates Person object and after input returns name and surname
-	Person person(f,s);
+	Person person(s,f);
 	cout << "Person Created" << endl;
 	cout << person.get_name() << " " << person.get_surname() << endl << endl;
 
@@ -155,7 +181,7 @@ int main()
 	cout << "Your name is: " << person.get_name() << " " << person.get_surname() << endl << endl;
 
 	//Creates Person with telephone object
-	Person_with_telephone pwt(t);
+	Person_with_telephone pwt(s,f,t);
 	cout << "Person with telephone Created" << endl;
 	cout << pwt.has_telephone_p() << endl << endl << "Type Phonenumber: ";
 	getline(cin, t), pwt.set_telephone(t); //User inputs value of telephone number into t and pwt.set_telephone takes that as a parameter
@@ -172,13 +198,13 @@ int main()
 	cout << "your number is: " << pwt.get_telephone() << endl << endl;
 
 	//Creates Person with email object
-	Person_with_email email(e);
+	Person_with_email email(s,f,e);
 	cout << email.has_email_p() << endl << endl << "Type email: ";
 	getline(cin, e), email.set_email(e);
 	cout << email.has_email_p() << endl << endl << "Your email is: " << email.get_email() << endl << endl;
 
 	//Creates Person with telephone
-	Person_with_telephone_and_email pwtae("","");
+	Person_with_telephone_and_email pwtae(s,f,t,e);
 	cout << pwtae.has_telephone_p() << endl << endl << "Type Phonenumber: ";
 	getline(cin, t), pwtae.set_telephone(t); //User inputs value of telephone number into t and pwtae.set_telephone takes that as a parameter
 	cout << pwtae.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl; //Boolean function runs and value of telephone number is printed
