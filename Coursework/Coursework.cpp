@@ -86,7 +86,6 @@ public:
 	}
 
 	friend ostream &operator<<(ostream &output, Person &p);
-	friend istream &operator>>(istream &input, Person &p);
 
 };
 
@@ -152,21 +151,25 @@ ostream &operator << (ostream &output, Person &p)
 	if (p.m_Telephone == "NoNumber" && p.m_Email == "NoEmail")
 	{
 		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() <<" >" <<  endl;
+		cout << endl;
 		return output;
 	}
 	else if (p.m_Email == "NoEmail")
 	{
 		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " T " << p.get_telephone() << " >" << endl;
+		cout << endl;
 		return output;
 	}
 	else if (p.m_Telephone == "NoNumber")
 	{
 		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " E " << p.get_email() << " >" << endl;
+		cout << endl;
 		return output;
 	}
 	else
 	{
 		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " T " << p.get_telephone() << " E " << p.get_email() << " >" << endl;
+		cout << endl;
 		return output;
 	}
 }
@@ -174,7 +177,9 @@ ostream &operator << (ostream &output, Person &p)
 istream &operator >> (istream &input, Person &p) 
 {
 	string s, f;
+	cout << "Enter Surname: ";
 	input >> s;
+	cout << "Enter name: ";
 	input >> f;
 	p.set_surname(s);
 	p.set_name(f);
@@ -184,8 +189,11 @@ istream &operator >> (istream &input, Person &p)
 istream &operator >> (istream &input, Person_with_telephone &pwt)
 {
 	string s, f, t;
+	cout << "Enter Surname: ";
 	input >> s;
+	cout << "Enter name: ";
 	input >> f;
+	cout << "Enter Telephone: ";
 	input >> t;
 	pwt.set_surname(s);
 	pwt.set_name(f);
@@ -196,8 +204,11 @@ istream &operator >> (istream &input, Person_with_telephone &pwt)
 istream &operator >> (istream &input, Person_with_email &pwe)
 {
 	string s, f, e;
+	cout << "Enter Surname: ";
 	input >> s;
+	cout << "Enter name: ";
 	input >> f;
+	cout << "Enter email: ";
 	input >> e;
 	pwe.set_surname(s);
 	pwe.set_name(f);
@@ -208,9 +219,13 @@ istream &operator >> (istream &input, Person_with_email &pwe)
 istream &operator >> (istream &input, Person_with_telephone_and_email &pwte)
 {
 	string s, f, t, e;
+	cout << "Enter Surname: ";
 	input >> s;
+	cout << "Enter name: ";
 	input >> f;
+	cout << "Enter Telephone: ";
 	input >> t;
+	cout << "Enter email: ";
 	input >> e;
 	pwte.set_surname(s);
 	pwte.set_name(f);
