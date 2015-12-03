@@ -154,33 +154,34 @@ int main()
 
 	cout << "Your name is: " << person.get_name() << " " << person.get_surname() << endl << endl;
 
-	//Creates Person with telephone object and after input returns telephone, name, surname and if you have a telephone number
+	//Creates Person with telephone object
 	Person_with_telephone pwt(t);
 	cout << "Person with telephone Created" << endl;
 	cout << pwt.has_telephone_p() << endl << endl << "Type Phonenumber: ";
-	getline(cin, t), pwt.set_telephone(t);
+	getline(cin, t), pwt.set_telephone(t); //User inputs value of telephone number into t and pwt.set_telephone takes that as a parameter
 	cout << pwt.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwt.get_telephone() << endl;
 
 	cout << "Type your name: ";
-	getline(cin, f), pwt.set_name(f);
+	getline(cin, f), pwt.set_name(f); //User inputs value of name into f and pwt.set_name takes that as a parameter
 
 	cout << "Type your surname: ";
-	getline(cin, s), pwt.set_surname(s);
+	getline(cin, s), pwt.set_surname(s); //User inputs value of surname into s and pwt.set_surname takes that as a parameter
 
+	//Print name and surname using the methods from Person_with_telephone
 	cout << "Your name is: " << pwt.get_name() << " " << pwt.get_surname();
 	cout << "your number is: " << pwt.get_telephone() << endl << endl;
 
-	//Creates Person with email object and after input returns email
+	//Creates Person with email object
 	Person_with_email email(e);
 	cout << email.has_email_p() << endl << endl << "Type email: ";
 	getline(cin, e), email.set_email(e);
 	cout << email.has_email_p() << endl << endl << "Your email is: " << email.get_email() << endl << endl;
 
-	//Creates Person with telephone and email and returns telephone and email
+	//Creates Person with telephone
 	Person_with_telephone_and_email pwtae("","");
 	cout << pwtae.has_telephone_p() << endl << endl << "Type Phonenumber: ";
-	getline(cin, t), pwtae.set_telephone(t);
-	cout << pwtae.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl;
+	getline(cin, t), pwtae.set_telephone(t); //User inputs value of telephone number into t and pwtae.set_telephone takes that as a parameter
+	cout << pwtae.has_telephone_p() << endl << endl << "Your Phonenumber is: " << pwtae.get_telephone() << endl; //Boolean function runs and value of telephone number is printed
 
 	cout << pwtae.has_email_p() << endl << endl << "Type email: ";
 	getline(cin, e), pwtae.set_email(e);
