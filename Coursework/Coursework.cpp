@@ -13,7 +13,7 @@ protected:
 	string m_Name, m_Surname, m_Telephone, m_Email;
 
 public:
-	Person() { m_Name = "NoName", m_Surname = "NoSurname", m_Telephone = "NoNumber", m_Email = "NoEmail"; }
+	Person() { m_Name = "NoName", m_Surname = "NoSurname", m_Telephone = "", m_Email = ""; }
 	Person(string &s, string &f)
 	{
 		set_surname(s);
@@ -56,13 +56,13 @@ public:
 
 		if (m_Telephone.empty())
 		{
-			cout << "You have no phone number registered" << endl;
+			//cout << "You have no phone number registered" << endl;
 			return false;
 		}
 
 		else
 		{
-			cout << "Your phone number is now registered"<< endl;
+			//cout << "Your phone number is now registered"<< endl;
 			return true;
 		}
 
@@ -73,22 +73,24 @@ public:
 
 		if (m_Email.empty())
 		{
-			cout << "You have no email registered" << endl;
+			//cout << "You have no email registered" << endl;
 			return false;
 		}
 
 		else
 		{
-			cout << "Your email is now registered" << endl;
+			//cout << "Your email is now registered" << endl;
 			return true;
 		}
 
 	}
 
+	//Allows the ostream class to access the variables in class Person
 	friend ostream &operator<<(ostream &output, Person &p);
 
 };
 
+//Inherits from class Person
 class Person_with_telephone : public virtual Person
 {
 
@@ -111,6 +113,7 @@ public:
 
 };
 
+//Inherits from class Person
 class Person_with_email : public virtual Person
 {
 protected:
@@ -131,6 +134,7 @@ public:
 
 };
 
+//Inherits from classes Person_with_telephone and Person_and_email
 class Person_with_telephone_and_email : public virtual Person_with_telephone, public virtual Person_with_email
 {
 protected:
@@ -148,24 +152,28 @@ public:
 
 ostream &operator << (ostream &output, Person &p)
 {
-	if (p.m_Telephone == "NoNumber" && p.m_Email == "NoEmail")
+	//Checks that both 'telephone' and 'email' are initialized to NoNumber and NoEmail respectively. If true, it prints name and surname
+	if (p.has_telephone_p() == false && p.has_email_p() == false)
 	{
 		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() <<" >" <<  endl;
 		cout << endl;
 		return output;
 	}
-	else if (p.m_Email == "NoEmail")
+	//Checks that 'email' is initialized to NoEmail. If true, it prints name, surname, and telephone
+	else if (p.has_email_p() == false)
 	{
 		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " T " << p.get_telephone() << " >" << endl;
 		cout << endl;
 		return output;
 	}
-	else if (p.m_Telephone == "NoNumber")
+	//Checks that 'telephone' is initialized to NoNumber. If true, it prints name, surname, and email
+	else if (p.has_telephone_p() == false)
 	{
 		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " E " << p.get_email() << " >" << endl;
 		cout << endl;
 		return output;
 	}
+	//Checks to see that all 4 variables are initialized to non default values. If true, it prints all 4 values
 	else
 	{
 		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " T " << p.get_telephone() << " E " << p.get_email() << " >" << endl;
@@ -174,24 +182,26 @@ ostream &operator << (ostream &output, Person &p)
 	}
 }
 
+//This is called at runtime after object Person is constructed from it's class
 istream &operator >> (istream &input, Person &p) 
 {
 	string s, f;
 	cout << "Enter Surname: ";
 	input >> s;
-	cout << "Enter name: ";
+	cout << "Enter Name: ";
 	input >> f;
 	p.set_surname(s);
 	p.set_name(f);
 	return input;
 }
 
+//This is called at runtime after object Person_with_telephone is constructed from it's class
 istream &operator >> (istream &input, Person_with_telephone &pwt)
 {
 	string s, f, t;
 	cout << "Enter Surname: ";
 	input >> s;
-	cout << "Enter name: ";
+	cout << "Enter Name: ";
 	input >> f;
 	cout << "Enter Telephone: ";
 	input >> t;
@@ -201,14 +211,15 @@ istream &operator >> (istream &input, Person_with_telephone &pwt)
 	return input;
 }
 
+//This is called at runtime after object Person_with_email is constructed from it's class
 istream &operator >> (istream &input, Person_with_email &pwe)
 {
 	string s, f, e;
 	cout << "Enter Surname: ";
 	input >> s;
-	cout << "Enter name: ";
+	cout << "Enter Name: ";
 	input >> f;
-	cout << "Enter email: ";
+	cout << "Enter Email: ";
 	input >> e;
 	pwe.set_surname(s);
 	pwe.set_name(f);
@@ -216,16 +227,17 @@ istream &operator >> (istream &input, Person_with_email &pwe)
 	return input;
 }
 
+//This is called at runtime after object Person_with_telephone_and_email is constructed from it's class
 istream &operator >> (istream &input, Person_with_telephone_and_email &pwte)
 {
 	string s, f, t, e;
 	cout << "Enter Surname: ";
 	input >> s;
-	cout << "Enter name: ";
+	cout << "Enter Name: ";
 	input >> f;
 	cout << "Enter Telephone: ";
 	input >> t;
-	cout << "Enter email: ";
+	cout << "Enter Email: ";
 	input >> e;
 	pwte.set_surname(s);
 	pwte.set_name(f);
@@ -340,22 +352,26 @@ istream &operator >> (istream &input, Person_with_telephone_and_email &pwte)
 
 int main()
 {
-	cout << "Person"<<endl;
+	//This creates object Person and takes input to initialize the variables
+	cout << "Person"<< endl << endl;
 	Person p;
 	cin >> p;
 	cout << p;
 
-	cout << "Person with telephone" <<endl;
+	//This creates object Person_with_telephone and takes input to initialize the variables
+	cout << "Person with telephone" <<endl << endl;
 	Person_with_telephone pwt;
 	cin >> pwt;
 	cout << pwt;
 
-	cout << "Person with email" << endl;
+	//This creates object Person_with_email and takes input to initialize the variables
+	cout << "Person with email" << endl << endl;
 	Person_with_email pwe;
 	cin >> pwe;
 	cout << pwe;
 
-	cout << "Person with telephone and email" << endl;
+	//This creates object Person_with_telephone_and_email and takes input to initialize the variables
+	cout << "Person with telephone and email" << endl << endl;
 	Person_with_telephone_and_email pwte;
 	cin >> pwte;
 	cout << pwte;
