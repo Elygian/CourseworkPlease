@@ -13,7 +13,7 @@ protected:
 	string m_Name, m_Surname, m_Telephone, m_Email;
 
 public:
-	Person() { string m_Name = "NoName", m_Surname = "NoSurname", m_Telephone = "NoNumber", m_Email = "NoEmail"; }
+	Person() { m_Name = "NoName", m_Surname = "NoSurname", m_Telephone = "NoNumber", m_Email = "NoEmail"; }
 	Person(string &s, string &f)
 	{
 		set_surname(s);
@@ -109,6 +109,7 @@ public:
 		m_Telephone = telephone;
 	}
 
+
 };
 
 class Person_with_email : public virtual Person
@@ -146,16 +147,75 @@ public:
 	}
 };
 
-ostream& operator<<(ostream &output, Person &p)
+ostream &operator << (ostream &output, Person &p)
 {
-	cout << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " T " << p.get_telephone() << " E " << p.get_email()  << " >";
-	return output;
+	if (p.m_Telephone == "NoNumber" && p.m_Email == "NoEmail")
+	{
+		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() <<" >" <<  endl;
+		return output;
+	}
+	else if (p.m_Email == "NoEmail")
+	{
+		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " T " << p.get_telephone() << " >" << endl;
+		return output;
+	}
+	else if (p.m_Telephone == "NoNumber")
+	{
+		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " E " << p.get_email() << " >" << endl;
+		return output;
+	}
+	else
+	{
+		output << "<person" << " S " << p.get_surname() << " N " << p.get_name() << " T " << p.get_telephone() << " E " << p.get_email() << " >" << endl;
+		return output;
+	}
 }
 
-istream& operator>>(istream &input, Person &p) 
+istream &operator >> (istream &input, Person &p) 
 {
-	input >> p.set_surname >> p.set_name;
-	//put >> p.set_name;
+	string s, f;
+	input >> s;
+	input >> f;
+	p.set_surname(s);
+	p.set_name(f);
+	return input;
+}
+
+istream &operator >> (istream &input, Person_with_telephone &pwt)
+{
+	string s, f, t;
+	input >> s;
+	input >> f;
+	input >> t;
+	pwt.set_surname(s);
+	pwt.set_name(f);
+	pwt.set_telephone(t);
+	return input;
+}
+
+istream &operator >> (istream &input, Person_with_email &pwe)
+{
+	string s, f, e;
+	input >> s;
+	input >> f;
+	input >> e;
+	pwe.set_surname(s);
+	pwe.set_name(f);
+	pwe.set_email(e);
+	return input;
+}
+
+istream &operator >> (istream &input, Person_with_telephone_and_email &pwte)
+{
+	string s, f, t, e;
+	input >> s;
+	input >> f;
+	input >> t;
+	input >> e;
+	pwte.set_surname(s);
+	pwte.set_name(f);
+	pwte.set_telephone(t);
+	pwte.set_email(e);
 	return input;
 }
 
@@ -265,13 +325,25 @@ istream& operator>>(istream &input, Person &p)
 
 int main()
 {
-	cout << "Enter surname and name" << endl;
+	cout << "Person"<<endl;
+	Person p;
+	cin >> p;
+	cout << p;
 
-	Person person;
-	cin >> person;
-	cout << person;
+	cout << "Person with telephone" <<endl;
+	Person_with_telephone pwt;
+	cin >> pwt;
+	cout << pwt;
 
+	cout << "Person with email" << endl;
+	Person_with_email pwe;
+	cin >> pwe;
+	cout << pwe;
 
+	cout << "Person with telephone and email" << endl;
+	Person_with_telephone_and_email pwte;
+	cin >> pwte;
+	cout << pwte;
 
 
 	return 0;
