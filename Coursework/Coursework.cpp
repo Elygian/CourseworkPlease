@@ -82,9 +82,6 @@ public:
 //Inherits from class Person
 class Person_with_telephone : public virtual Person
 {
-
-protected:
-
 public:
 	Person_with_telephone() {}
 	Person_with_telephone(string &s, string &f, string &telephone)
@@ -103,8 +100,6 @@ public:
 //Inherits from class Person
 class Person_with_email : public virtual Person
 {
-protected:
-
 public:
 	Person_with_email() {}
 	Person_with_email(string &s, string &f ,string &email)
