@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-
 //Allows use of basic C++ functions
 using namespace std;
 
@@ -50,7 +49,6 @@ public:
 		return m_Email;
 	}
 
-	
 	virtual bool has_telephone_p()
 	{
 
@@ -59,35 +57,26 @@ public:
 			//cout << "NoNumber" << endl;
 			return false;
 		}
-
 		else
 		{
 			//cout << "Your phone number is now registered"<< endl;
 			return true;
 		}
-
 	}
 
 	virtual bool has_email_p()
 	{
-
 		if (m_Email.empty())
 		{
 			//cout << "NoEmail" << endl;
 			return false;
 		}
-
 		else
 		{
 			//cout << "Your email is now registered" << endl;
 			return true;
 		}
-
 	}
-
-	//Allows the ostream class to access the variables in class Person
-	friend ostream &operator<<(ostream &output, Person &p);
-
 };
 
 //Inherits from class Person
@@ -109,8 +98,6 @@ public:
 	{
 		m_Telephone = telephone;
 	}
-
-
 };
 
 //Inherits from class Person
@@ -131,14 +118,11 @@ public:
 	{
 		m_Email = email;
 	}
-
 };
 
 //Inherits from classes Person_with_telephone and Person_and_email
 class Person_with_telephone_and_email : public virtual Person_with_telephone, public virtual Person_with_email
 {
-protected:
-
 public:
 	Person_with_telephone_and_email() {}
 	Person_with_telephone_and_email(string &s, string &f, string &telephone, string &email)
@@ -355,6 +339,7 @@ int main()
 	//This creates object Person and takes input to initialize the variables
 	cout << "Person"<< endl << endl;
 	Person p;
+	cout << p;
 	cin >> p;
 	cout << p;
 
@@ -375,7 +360,6 @@ int main()
 	Person_with_telephone_and_email pwte;
 	cin >> pwte;
 	cout << pwte;
-
 
 	return 0;
 }
