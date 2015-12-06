@@ -143,80 +143,34 @@ ostream &operator << (ostream &output, Person &p)
 	}
 }
 
-istream& operator>>(istream &is, Person &p) {
-	string opening, s, surname, f, name, closing;
-
-	if (
-		(is >> opening >> s >> surname >> f >> name >> closing)
-		&&
-		((opening == "<person") && (s == "S") && (f == "N") && (closing == ">"))
-		)
+istream& operator>>(istream &is, Person)
 {
-		p = Person(surname, name);
-}
 	return is;
 }
 
-istream& operator>>(istream &is, Person_with_email &p) {
-	string opening, s, surname, f, name, e, email, closing;
-
-	if (
-		(is >> opening >> s >> surname >> f >> name >> e >> email >> closing) &&
-		((opening == "<person") && (s == "S") && (f == "N") && (e == "E") && (closing == ">"))) {
-		p = Person_with_email(surname, name, email);
-}
-	return is;
-}
-
-istream& operator>>(istream &is, Person_with_telephone &p) {
-	string opening, s, surname, f, name, t, telephone, test_token;
-
-	if ((is >> opening >> s >> surname >> f >> name >> t) && (opening == "<person") && (s == "S") && (f == "N") && (t == "T")) {
-		if ((is >> test_token) && (test_token == "+")) {
-			is >> telephone;
-}
-		else {
-			telephone = test_token;
-		}
-
-		p = Person_with_telephone(surname, name, telephone);
-	}
-
-	return is;
-}
-
-istream& operator>>(istream &is, Person_with_telephone_email &p)
+istream& operator>>(istream &is, Person_with_email)
 {
-	string opening, s, surname, f, name, t, telephone, e, email, closing, test_token;
-
-	if ((is >> opening >> s >> surname >> f >> name >> t) && (opening == "<person ") && (s == "S") && (f == " N ") && (t == " T ")) 
-	{
-		if ((is >> test_token) && (test_token == "+")) 
-		{
-			is >> telephone;
-		}
-		else 
-		{
-			telephone = test_token;
-		}
-
-		if ((is >> e >> email >> closing) && ((e == " E ") && (closing == " >"))) 
-		{
-			p = Person_with_telephone_email(surname, name, telephone, email);
-		}
-
-	}
 	return is;
 }
 
-Person* make_person(istream &stream) 
+istream& operator>>(istream &is, Person_with_telephone)
+{
+	return is;
+}
+
+istream& operator>>(istream &is, Person_with_telephone_email)
+{
+	return is;
+}
+
+Person* make_person(istream &stream)
 {
 	Person *person_pointer = new Person;
 	stream >> *person_pointer;
 	return person_pointer;
 }
 
-Person_with_email* make_person_email(istream &stream) 
+Person_with_email* make_person_email(istream &stream)
 {
 	Person_with_email *person_pointer = new Person_with_email;
 	stream >> *person_pointer;
@@ -230,20 +184,19 @@ Person_with_telephone* make_person_telephone(istream &stream)
 	return person_pointer;
 }
 
-Person_with_telephone_email* make_person_telephone_email(istream &stream) 
+Person_with_telephone_email* make_person_telephone_email(istream &stream)
 {
 	Person_with_telephone_email *person_pointer = new Person_with_telephone_email;
 	stream >> *person_pointer;
 	return person_pointer;
 }
 
-istream &read_person(istream &in, Person * & p) 
+istream &read_person(istream &in, Person * & p)
 {
 	string input;
+	stringstream stream(input);
 	getline(in, input);
 	cout << "input:\n" << input;
-	if (input == " ") { return in; }
-	stringstream stream(input);
 	string s = " S ";
 	string e = " E ";
 	string t = " T ";
@@ -256,39 +209,36 @@ istream &read_person(istream &in, Person * & p)
 	if (input.find(s) != string::npos) { is_valid_person = true; }
 
 
-	if (has_e && has_t) 
+	if (has_e && has_t)
 	{
 		cout << "e + t\n";
-		Person_with_telephone_email *person_pointer = make_person_telephone_email(stream);
-		p = person_pointer;
+		p = make_person_telephone_email(stream);
+
 	}
-	else if (has_e) 
+	else if (has_e)
 	{
 		cout << "e\n";
-		Person_with_email *person_pointer = make_person_email(stream);
-		p = person_pointer;
+		p = make_person_email(stream);;
 	}
-	else if (has_t) 
+	else if (has_t)
 	{
 		cout << "t \n";
-		Person_with_telephone *person_pointer = make_person_telephone(stream);
-		p = person_pointer;
+		p = make_person_telephone(stream);
 
 	}
 	else if (is_valid_person)
 	{
 		cout << "is person \n";
-		Person *person_pointer = make_person(stream);
-		p = person_pointer;
+		p = make_person(stream);
 	}
-	else 
+	else
 	{
 		cout << "\nInvalid input.\n";
 	}
 	return in;
 }
 
-int main() 
+int main()
 {
 	//Tests the read_person istream
 	Person *p = 0;
