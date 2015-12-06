@@ -185,18 +185,23 @@ istream& operator>>(istream &is, Person_with_telephone &p) {
 	return is;
 }
 
-istream& operator>>(istream &is, Person_with_telephone_email &p) {
+istream& operator>>(istream &is, Person_with_telephone_email &p)
+{
 	string opening, s, surname, f, name, t, telephone, e, email, closing, test_token;
 
-	if ((is >> opening >> s >> surname >> f >> name >> t) && (opening == "<person") && (s == "S") && (f == "N") && (t == "T")) {
-		if ((is >> test_token) && (test_token == "+")) {
+	if ((is >> opening >> s >> surname >> f >> name >> t) && (opening == "<person ") && (s == "S") && (f == " N ") && (t == " T ")) 
+	{
+		if ((is >> test_token) && (test_token == "+")) 
+		{
 			is >> telephone;
 		}
-		else {
+		else 
+		{
 			telephone = test_token;
 		}
 
-		if ((is >> e >> email >> closing) && ((e == "E") && (closing == ">"))) {
+		if ((is >> e >> email >> closing) && ((e == " E ") && (closing == " >"))) 
+		{
 			p = Person_with_telephone_email(surname, name, telephone, email);
 		}
 
@@ -204,31 +209,36 @@ istream& operator>>(istream &is, Person_with_telephone_email &p) {
 	return is;
 }
 
-Person* make_person(istream &stream) {
+Person* make_person(istream &stream) 
+{
 	Person *person_pointer = new Person;
 	stream >> *person_pointer;
 	return person_pointer;
 }
 
-Person_with_email* make_person_email(istream &stream) {
+Person_with_email* make_person_email(istream &stream) 
+{
 	Person_with_email *person_pointer = new Person_with_email;
 	stream >> *person_pointer;
 	return person_pointer;
 }
 
-Person_with_telephone* make_person_telephone(istream &stream) {
+Person_with_telephone* make_person_telephone(istream &stream)
+{
 	Person_with_telephone *person_pointer = new Person_with_telephone;
 	stream >> *person_pointer;
 	return person_pointer;
 }
 
-Person_with_telephone_email* make_person_telephone_email(istream &stream) {
+Person_with_telephone_email* make_person_telephone_email(istream &stream) 
+{
 	Person_with_telephone_email *person_pointer = new Person_with_telephone_email;
 	stream >> *person_pointer;
 	return person_pointer;
 }
 
-istream &read_person(istream &in, Person * & p) {
+istream &read_person(istream &in, Person * & p) 
+{
 	string input;
 	getline(in, input);
 	cout << "input:\n" << input;
@@ -246,34 +256,40 @@ istream &read_person(istream &in, Person * & p) {
 	if (input.find(s) != string::npos) { is_valid_person = true; }
 
 
-	if (has_e && has_t) {
+	if (has_e && has_t) 
+	{
 		cout << "e + t\n";
 		Person_with_telephone_email *person_pointer = make_person_telephone_email(stream);
 		p = person_pointer;
 	}
-	else if (has_e) {
+	else if (has_e) 
+	{
 		cout << "e\n";
 		Person_with_email *person_pointer = make_person_email(stream);
 		p = person_pointer;
 	}
-	else if (has_t) {
+	else if (has_t) 
+	{
 		cout << "t \n";
 		Person_with_telephone *person_pointer = make_person_telephone(stream);
 		p = person_pointer;
 
 	}
-	else if (is_valid_person) {
+	else if (is_valid_person)
+	{
 		cout << "is person \n";
 		Person *person_pointer = make_person(stream);
 		p = person_pointer;
 	}
-	else {
+	else 
+	{
 		cout << "\nInvalid input.\n";
 	}
 	return in;
 }
 
-int main() {
+int main() 
+{
 	//Tests the read_person istream
 	Person *p = 0;
 	string ss = "<person S Smith N Tom >\n<person S Smith N Dick T +49.921.1434 >\n<person S Smith N Harry E hsmith@gmail.com >\n<person S Smith N Mary T +39.921.1434 E msmith@gmail.com >\n<person S John N John T + 33.921.1434 E jjohn@gmail.com >";
