@@ -2,10 +2,9 @@
 #include <string>
 #include <sstream>
 
-//Allows use of basic C++ functions
 using namespace std;
 
-//Base class for all classes
+//Parent class for inheritance heirarchy
 class Person
 {
 protected:
@@ -77,7 +76,6 @@ public:
 	}
 };
 
-//Inherits from class Person
 class Person_with_telephone : public virtual Person
 {
 protected:
@@ -92,7 +90,6 @@ public:
 	}
 };
 
-//Inherits from class Person
 class Person_with_email : public virtual Person
 {
 protected:
@@ -107,7 +104,6 @@ public:
 	}
 };
 
-//Inherits from classes Person_with_telephone and Person_and_email
 class Person_with_telephone_email : public virtual Person_with_telephone, public virtual Person_with_email
 {
 public:
@@ -143,6 +139,8 @@ ostream &operator << (ostream &output, Person &p)
 	}
 }
 
+//Here we overload the operator>> so we can pass class Person through make_person
+
 istream& operator>>(istream &is, Person)
 {
 	return is;
@@ -163,6 +161,7 @@ istream& operator>>(istream &is, Person_with_telephone_email)
 	return is;
 }
 
+//Here we create the pointers to the objects
 Person* make_person(istream &stream)
 {
 	Person *person_pointer = new Person;
@@ -190,6 +189,8 @@ Person_with_telephone_email* make_person_telephone_email(istream &stream)
 	stream >> *person_pointer;
 	return person_pointer;
 }
+
+// read_person looks at the input data and creates the appropriate object from the class
 
 istream &read_person(istream &in, Person * & p)
 {
@@ -238,11 +239,11 @@ istream &read_person(istream &in, Person * & p)
 	return in;
 }
 
+// Modified read_person test to take stringstream
 int main()
 {
-	//Tests the read_person istream
 	Person *p = 0;
-	string ss = "<person S Smith N Tom >\n<person S Smith N Dick T +49.921.1434 >\n<person S Smith N Harry E hsmith@gmail.com >\n<person S Smith N Mary T +39.921.1434 E msmith@gmail.com >\n<person S John N John T + 33.921.1434 E jjohn@gmail.com >";
+	string ss = "<person S Smith N Tom >\n<person S Smith N Dick T +49.921.1434 >\n<person S Smith N Harry E hsmith@gmail.com >\n<person S Smith N Mary T +39.921.1434 E msmith@gmail.com >\n<person S John N John T + 33.921.1434 E jjohn@gmail.com >\n";
 	stringstream iss(ss);
 	while (read_person(iss, p) && p)
 		cout << *p << endl;
