@@ -331,30 +331,6 @@ istream &operator >> (istream &input, Person_with_telephone_and_email &pwte)
 
 int main()
 {
-	//This creates object Person and takes input to initialize the variables
-	cout << "Person"<< endl << endl;
-	Person p;
-	cout << p;
-	cin >> p;
-	cout << p;
-
-	//This creates object Person_with_telephone and takes input to initialize the variables
-	cout << "Person with telephone" <<endl << endl;
-	Person_with_telephone pwt;
-	cin >> pwt;
-	cout << pwt;
-
-	//This creates object Person_with_email and takes input to initialize the variables
-	cout << "Person with email" << endl << endl;
-	Person_with_email pwe;
-	cin >> pwe;
-	cout << pwe;
-
-	//This creates object Person_with_telephone_and_email and takes input to initialize the variables
-	cout << "Person with telephone and email" << endl << endl;
-	Person_with_telephone_and_email pwte;
-	cin >> pwte;
-	cout << pwte;
 
 	return 0;
 }
