@@ -110,8 +110,6 @@ public:
 //Inherits from classes Person_with_telephone and Person_and_email
 class Person_with_telephone_email : public virtual Person_with_telephone, public virtual Person_with_email
 {
-protected:
-
 public:
 	Person_with_telephone_email() {}
 	Person_with_telephone_email(string &s, string &f, string &t, string &e) : Person(s, f), Person_with_telephone(s, f, t), Person_with_email(s, f, e) {}
